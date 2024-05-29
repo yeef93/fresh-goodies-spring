@@ -38,22 +38,32 @@ public class ProductController {
 
     @PutMapping
     public ResponseEntity<Response<Product>> updateProduct(@RequestBody Product product) {
-        return Response.successfulResponse("Update product success", productService.updateProduct(product));
+        try {
+            var updateProduct = productService.updateProduct(product);
+            return Response.successfulResponse(HttpStatus.OK.value(), "Product updated", productService.updateProduct(updateProduct));
+        } catch (ApplicationException e) {
+            return Response.failedResponse(e.getHttpStatus().value(), e.getMessage());
+        }
     }
 
     @PostMapping
     public ResponseEntity<Response<Product>> createProduct(@Validated @RequestBody Product product) {
-        var createdProduct = productService.addProduct(product);
-        return Response.successfulResponse(HttpStatus.CREATED.value(), "New product created", productService.updateProduct(createdProduct));
+        try {
+            var createdProduct = productService.addProduct(product);
+            return Response.successfulResponse(HttpStatus.CREATED.value(), "New product created", productService.updateProduct(createdProduct));
+        } catch (ApplicationException e) {
+            return Response.failedResponse(e.getHttpStatus().value(), e.getMessage());
+        }
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Response<Object>> deleteProduct(@PathVariable Long id) {
         try {
             productService.deleteProduct(id);
-            return ResponseEntity.ok("Product with ID " + id + " was successfully deleted.");
+            return Response.successfulResponse("Product with ID " + id + " was successfully deleted.");
         } catch (ApplicationException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return Response.failedResponse(e.getHttpStatus().value(), e.getMessage());
         }
     }
 

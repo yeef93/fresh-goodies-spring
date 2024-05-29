@@ -5,6 +5,7 @@ import com.yeef93.fresh_goodies_spring.products.Product;
 import com.yeef93.fresh_goodies_spring.products.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.java.Log;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         boolean removed = products.removeIf(product -> product.getId() == id);
         if (!removed) {
-            throw new ApplicationException("Product with ID " + id + " not found.");
+            throw new ApplicationException(HttpStatus.NOT_FOUND, "Product not found");
         }
     }
 }
