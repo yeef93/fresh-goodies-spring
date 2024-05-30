@@ -24,6 +24,7 @@ public class ProductServiceImpl implements ProductService {
         // Add initial data
         products.add(new Product(counter.incrementAndGet(), "White Onion", "Fresh Veggie", "/products/white-onion.png", 0.0027, 1200, new Product.Metadata("g", 100, 40, 1.1, 0.1, 100, 9.3)));
         products.add(new Product(counter.incrementAndGet(), "Tomato", "Fresh Veggie", "/products/tomato.png", 0.0030, 1000, new Product.Metadata("g", 100, 18, 0.9, 0.2, 100, 3.9)));
+        products.add(new Product(counter.incrementAndGet(), "Lettuce", "Fresh Veggie", "/products/tomato.png", 0.0030, 1000, new Product.Metadata("g", 100, 18, 0.9, 0.2, 100, 3.9)));
     }
 
     @Override

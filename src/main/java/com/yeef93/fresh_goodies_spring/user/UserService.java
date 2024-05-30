@@ -21,8 +21,10 @@ public class UserService {
     public void initData() {
         User user1 = new User(1L, "user1", new ArrayList<>());
         User user2 = new User(2L, "user2", new ArrayList<>());
+        User user3 = new User(3L, "user3", new ArrayList<>());
 
         addUser(user1);
         addUser(user2);
+        addUser(user3);
     }
 }

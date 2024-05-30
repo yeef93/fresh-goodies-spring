@@ -1,9 +1,11 @@
 package com.yeef93.fresh_goodies_spring.favorites;
 
+import com.yeef93.fresh_goodies_spring.favorites.DTO.FavoriteProductDTO;
 import com.yeef93.fresh_goodies_spring.favorites.Entity.Favorite;
 import com.yeef93.fresh_goodies_spring.products.Product;
 import com.yeef93.fresh_goodies_spring.products.service.ProductService;
 import com.yeef93.fresh_goodies_spring.user.User;
+import com.yeef93.fresh_goodies_spring.user.UserDTO;
 import com.yeef93.fresh_goodies_spring.user.UserService;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +36,22 @@ public class FavoriteService {
 
         // Add some initial favorites
         addFavorite(1L, 1L);
+        addFavorite(2L, 1L);
     }
 
-    public List<Favorite> getfavoritemsByUserId(Long userId) {
-        List<Favorite> userFavorites = new ArrayList<>();
+    public UserDTO getfavoritemsByUserId(Long userId) {
+        List<FavoriteProductDTO> userFavoriteProducts = new ArrayList<>();
+        String username = null;
         for (Favorite favorite : favorites) {
             if (favorite.getUser() != null && favorite.getUser().getId() != null && favorite.getUser().getId().equals(userId)) {
-                userFavorites.add(favorite);
+                if (username == null) {
+                    username = favorite.getUser().getUsername();
+                }
+                userFavoriteProducts.add(new FavoriteProductDTO(favorite.getId()));
             }
         }
-        return userFavorites;
+
+        return new UserDTO(userId, username, userFavoriteProducts);
     }
 
     public void addFavorite(Long userId, Long productId) {
