@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product addProduct(Product product) {
+        product.setId(counter.incrementAndGet());
         boolean exists = products.stream().anyMatch(p -> p.getId() == product.getId());
         if (exists) {
             throw new ApplicationException("Product with ID " + product.getId() + " already exists.");

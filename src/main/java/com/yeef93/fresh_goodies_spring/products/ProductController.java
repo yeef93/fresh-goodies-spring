@@ -36,21 +36,21 @@ public class ProductController {
         return Response.successfulResponse("Product detail found", productFound);
     }
 
-    @PutMapping
-    public ResponseEntity<Response<Product>> updateProduct(@RequestBody Product product) {
-        try {
-            var updateProduct = productService.updateProduct(product);
-            return Response.successfulResponse(HttpStatus.OK.value(), "Product updated", productService.updateProduct(updateProduct));
-        } catch (ApplicationException e) {
-            return Response.failedResponse(e.getHttpStatus().value(), e.getMessage());
-        }
-    }
-
     @PostMapping
     public ResponseEntity<Response<Product>> createProduct(@Validated @RequestBody Product product) {
         try {
             var createdProduct = productService.addProduct(product);
             return Response.successfulResponse(HttpStatus.CREATED.value(), "New product created", productService.updateProduct(createdProduct));
+        } catch (ApplicationException e) {
+            return Response.failedResponse(e.getHttpStatus().value(), e.getMessage());
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<Response<Product>> updateProduct(@RequestBody Product product) {
+        try {
+            var updateProduct = productService.updateProduct(product);
+            return Response.successfulResponse(HttpStatus.OK.value(), "Product updated", productService.updateProduct(updateProduct));
         } catch (ApplicationException e) {
             return Response.failedResponse(e.getHttpStatus().value(), e.getMessage());
         }
