@@ -1,6 +1,6 @@
 package com.yeef93.fresh_goodies_spring.user;
 
-import com.yeef93.fresh_goodies_spring.favorites.Favorite;
+import com.yeef93.fresh_goodies_spring.favorites.Entity.Favorite;
 import lombok.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.yeef93.fresh_goodies_spring.favorites;
+package com.yeef93.fresh_goodies_spring.favorites.Entity;
 
 import com.yeef93.fresh_goodies_spring.products.Product;
 import com.yeef93.fresh_goodies_spring.user.User;
